@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coming Soon</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    min-height: 100vh;
+    background: #0a0a0f;
+    color: #f0ede8;
+    font-family: 'DM Sans', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Background glow blobs */
+  body::before {
+    content: '';
+    position: fixed;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,180,80,0.08) 0%, transparent 70%);
+    top: -100px; left: -100px;
+    pointer-events: none;
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(100,160,255,0.07) 0%, transparent 70%);
+    bottom: -80px; right: -80px;
+    pointer-events: none;
+  }
+
+  .container {
+    text-align: center;
+    padding: 2rem;
+    z-index: 1;
+    max-width: 680px;
+    animation: fadeUp 1s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #c8a96e;
+    border: 1px solid rgba(200,169,110,0.35);
+    padding: 0.4rem 1.1rem;
+    border-radius: 100px;
+    margin-bottom: 2.2rem;
+    animation: fadeUp 1s ease 0.15s both;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1.4rem;
+    animation: fadeUp 1s ease 0.3s both;
+  }
+
+  h1 span {
+    color: #c8a96e;
+  }
+
+  .subtitle {
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: rgba(240,237,232,0.55);
+    line-height: 1.7;
+    max-width: 420px;
+    margin: 0 auto 3rem;
+    animation: fadeUp 1s ease 0.45s both;
+  }
+
+  /* Countdown */
+  .countdown {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-bottom: 3rem;
+    animation: fadeUp 1s ease 0.6s both;
+  }
+
+  .unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .unit .num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+    background: linear-gradient(135deg, #f0ede8 40%, #c8a96e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    min-width: 3ch;
+    text-align: center;
+  }
+
+  .unit .label {
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(240,237,232,0.38);
+  }
+
+  .sep {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: rgba(200,169,110,0.3);
+    align-self: flex-start;
+    padding-top: 0.15rem;
+  }
+
+  /* Email form */
+  .form {
+    display: flex;
+    gap: 0;
+    max-width: 400px;
+    margin: 0 auto;
+    animation: fadeUp 1s ease 0.75s both;
+  }
+
+  .form input {
+    flex: 1;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-right: none;
+    border-radius: 8px 0 0 8px;
+    padding: 0.85rem 1.2rem;
+    color: #f0ede8;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .form input::placeholder { color: rgba(240,237,232,0.3); }
+  .form input:focus { border-color: rgba(200,169,110,0.5); }
+
+  .form button {
+    background: #c8a96e;
+    color: #0a0a0f;
+    border: none;
+    border-radius: 0 8px 8px 0;
+    padding: 0.85rem 1.5rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s;
+  }
+
+  .form button:hover { background: #d9bc84; }
+
+  .thank-you {
+    display: none;
+    font-size: 0.9rem;
+    color: #c8a96e;
+    margin-top: 0.75rem;
+  }
+
+  /* Decorative line */
+  .divider {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(200,169,110,0.5), transparent);
+    margin: 3rem auto 1.8rem;
+    animation: fadeUp 1s ease 0.9s both;
+  }
+
+  .footer-note {
+    font-size: 0.78rem;
+    color: rgba(240,237,232,0.25);
+    letter-spacing: 0.05em;
+    animation: fadeUp 1s ease 1s both;
+  }
+
+  @media (max-width: 480px) {
+    .countdown { gap: 1rem; }
+    .unit .num { font-size: 2.2rem; }
+    .form { flex-direction: column; }
+    .form input { border-right: 1px solid rgba(255,255,255,0.1); border-bottom: none; border-radius: 8px 8px 0 0; }
+    .form button { border-radius: 0 0 8px 8px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="badge">Something exciting is coming</div>
+
+  <h1>We're Almost<br><span>Ready.</span></h1>
+
+  <p class="subtitle">
+    Our website is getting the finishing touches. 
+    Come back in 3 days — you won't be disappointed.
+  </p>
+
+  <div class="countdown">
+    <div class="unit">
+      <span class="num" id="days">03</span>
+      <span class="label">Days</span>
+    </div>
+    <span class="sep">:</span>
+    <div class="unit">
+      <span class="num" id="hours">00</span>
+      <span class="label">Hours</span>
+    </div>
+    <span class="sep">:</span>
+    <div class="unit">
+      <span class="num" id="mins">00</span>
+      <span class="label">Mins</span>
+    </div>
+    <span class="sep">:</span>
+    <div class="unit">
+      <span class="num" id="secs">00</span>
+      <span class="label">Secs</span>
+    </div>
+  </div>
+
+  <div class="form">
+    <input type="email" id="emailInput" placeholder="Enter your email for updates" />
+    <button onclick="notify()">Notify Me</button>
+  </div>
+  <p class="thank-you" id="thankYou">✓ You're on the list! We'll be in touch.</p>
+
+  <div class="divider"></div>
+  <p class="footer-note">© 2026 · VINALAX HR SOLUTIONS · All rights reserved</p>
+</div>
+
+<script>
+  // Set launch date to 3 days from now
+  const launch = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000);
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  function tick() {
+    const diff = Math.max(0, launch - Date.now());
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('days').textContent = pad(d);
+    document.getElementById('hours').textContent = pad(h);
+    document.getElementById('mins').textContent = pad(m);
+    document.getElementById('secs').textContent = pad(s);
+  }
+
+  tick();
+  setInterval(tick, 1000);
+
+  function notify() {
+    const v = document.getElementById('emailInput').value;
+    if (!v || !v.includes('@')) {
+      document.getElementById('emailInput').style.borderColor = 'rgba(255,100,100,0.5)';
+      return;
+    }
+    document.querySelector('.form').style.display = 'none';
+    document.getElementById('thankYou').style.display = 'block';
+  }
+</script>
+</body>
+</html>
